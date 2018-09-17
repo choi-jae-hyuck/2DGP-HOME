@@ -12,31 +12,41 @@ triger=0
 def ani_right(x,y,frame):
     clear_canvas()
     grass.draw(400,30)
-    character.clip_draw(frame*100,100,100,100,x,90)
+    character.clip_draw(frame*100,100,100,100,x,y)
     update_canvas()
-    frame=(frame+1)%8
     delay(0.05)
     get_events()
-def ani_left():
-    clear_canvas(x,y,frame)
+def ani_left(x,y,frame):
+    clear_canvas()
     grass.draw(400,30)
-    character.clip_draw(frame*100,0,100,100,x,90)
+    character.clip_draw(frame*100,0,100,100,x,y)
     update_canvas()
-    frame=(frame+1)%8
     delay(0.05)
     get_events()
 
-def move(x1,y1,x2,y2):
+def move(x1,y1,x2,y2,frame):
     xpos=(x2-x1) // 30
     ypos=(y2-y1) // 30
     while(x1!=x2):
         x1 +=xpos
         y1 +=ypos
+        frame=(frame+1)%8
         if (x1<x2):
             ani_right(x1,y1,frame)
         elif (x1>x2):
             ani_left(x1,y1,frame)
 
+            
+move(203,535,132,243,frame)
+move(132,243,535,470,frame)
+move(535,470,477,203,frame)
+move(477,203,715,136,frame)
+move(715,136,316,225,frame)
+move(316,225,510,92,frame)
+move(510,92,692,518,frame)
+move(692,518,682,336,frame)
+move(682,336,712,349,frame)
+move(712,349,203,535,frame)
 
         
         
