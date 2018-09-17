@@ -6,8 +6,12 @@ character = load_image('animation_sheet.png')
 
 
 x=0
-frame=0;
+frame=0
 triger=0
+
+def move():
+    pass
+
 while(True):
     while(triger==0):
         clear_canvas()
