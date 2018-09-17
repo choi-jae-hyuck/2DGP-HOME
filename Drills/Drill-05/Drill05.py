@@ -47,7 +47,7 @@ while(True):
     move(682,336,712,349,frame)
     move(712,349,203,535,frame)
 
-        
+#end
         
     
 close_canvas()
