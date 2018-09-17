@@ -30,9 +30,9 @@ def move(x1,y1,x2,y2,frame):
         x1 +=xpos
         y1 +=ypos
         frame=(frame+1)%8
-        if (xpos<0):
+        if (xpos>0):
             ani_right(x1,y1,frame)
-        elif (xpos>0):
+        elif (xpos<0):
             ani_left(x1,y1,frame)
 
 while(True):
