@@ -27,7 +27,7 @@ def ani_left(x,y,frame):
 def move(x1,y1,x2,y2,frame):
     xpos=(x2-x1) // 30
     ypos=(y2-y1) // 30
-    while(x1!=x2):
+    for i in range(1,30+1):
         x1 +=xpos
         y1 +=ypos
         frame=(frame+1)%8
