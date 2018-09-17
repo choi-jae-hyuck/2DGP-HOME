@@ -7,7 +7,6 @@ character = load_image('animation_sheet.png')
 
 x=0
 frame=0
-triger=0
 
 def ani_right(x,y,frame):
     clear_canvas()
