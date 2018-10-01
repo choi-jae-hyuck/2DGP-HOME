@@ -1,11 +1,10 @@
+from pico2d import *
 import turtle
 import random
-from pico2d import *
 
 
 def stop():
     turtle.bye()
-
 
 def prepare_turtle_canvas():
     turtle.setup(1024, 768)
@@ -148,16 +147,16 @@ a10=[random.randint(-300,300) for n in range(2)]
 
 
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
-kpu_ground = load_image('KPU_GROUND.png')
+kpu_ground = load_image('KPU_G.png')
 character = load_image('animation_sheet.png')
 running = True
-x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
+px, py = KPU_WIDTH // 2, KPU_HEIGHT // 2
 frame = 0
 
 while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, px, py)
     update_canvas()
     frame = (frame + 1) % 8
 
