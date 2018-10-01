@@ -83,7 +83,7 @@ prepare_turtle_canvas()
 p1=[-200,100]
 p2=[300,200]
 
-draw_line_basic(p1,p2)
+draw_line(p1,p2)
 
 
 
