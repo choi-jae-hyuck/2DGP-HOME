@@ -1,7 +1,10 @@
 from pico2d import *
 import turtle
 import random
-
+KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+open_canvas(KPU_WIDTH, KPU_HEIGHT )
+kpu_ground = load_image('KPU_GROUND.png')
+character = load_image('animation_sheet.png')
 
 def stop():
     turtle.bye()
@@ -146,9 +149,8 @@ a9=[random.randint(-300,300) for n in range(2)]
 a10=[random.randint(-300,300) for n in range(2)]
 
 
-KPU_WIDTH, KPU_HEIGHT = 1280, 1024
-kpu_ground = load_image('KPU_G.png')
-character = load_image('animation_sheet.png')
+
+
 running = True
 px, py = KPU_WIDTH // 2, KPU_HEIGHT // 2
 frame = 0
