@@ -1,5 +1,6 @@
 import turtle
 import random
+from pico2d import *
 
 
 def stop():
@@ -49,22 +50,6 @@ def draw_big_point(p):
 def draw_point(p):
     turtle.goto(p)
     turtle.dot(5, random.random(), random.random(), random.random())
-
-
-def draw_curve_3_points(p1, p2, p3):
-    draw_big_point(p1)
-    draw_big_point(p2)
-    draw_big_point(p3)
-
-    for i in range(0,100+1,2):
-        t=i/100
-        x = (2 * t ** 2 - 3 * t + 1) * p1[0] + (-4 * t ** 2 + 4 * t) * p2[0] + (2 * t ** 2 - t) * p3[0]
-        y = (2 * t ** 2 - 3 * t + 1) * p1[1] + (-4 * t ** 2 + 4 * t) * p2[1] + (2 * t ** 2 - t) * p3[1]
-        draw_point((x, y))
-    draw_point(p3)
-
-    pass
-
 
 
 def draw_curve_10_points(p1, p2, p3, p4,p5,p6,p7,p8,p9,p10):
@@ -150,8 +135,6 @@ def draw_curve_10_points(p1, p2, p3, p4,p5,p6,p7,p8,p9,p10):
     draw_point(p1)
 
 
-prepare_turtle_canvas()
-
 a1=[random.randint(-300,300) for n in range(2)]
 a2=[random.randint(-300,300) for n in range(2)]
 a3=[random.randint(-300,300) for n in range(2)]
@@ -163,7 +146,24 @@ a8=[random.randint(-300,300) for n in range(2)]
 a9=[random.randint(-300,300) for n in range(2)]
 a10=[random.randint(-300,300) for n in range(2)]
 
-draw_curve_10_points(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10)
+
+KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+kpu_ground = load_image('KPU_GROUND.png')
+character = load_image('animation_sheet.png')
+running = True
+x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
+frame = 0
+
+while running:
+    clear_canvas()
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    update_canvas()
+    frame = (frame + 1) % 8
+
+    delay(0.02)
+
+close_canvas()
 
 
 turtle.done()
