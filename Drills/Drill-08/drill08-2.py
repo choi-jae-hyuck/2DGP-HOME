@@ -307,4 +307,7 @@ while running:
     a10 = [random.randint(0, 1000) for n in range(2)]
     draw_curve_10_points(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10,frame)
 
+
+    #complete
+
 turtle.done()
