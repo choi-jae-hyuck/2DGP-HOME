@@ -231,7 +231,7 @@ a9=[random.randint(-300,300) for n in range(2)]
 a10=[random.randint(-300,300) for n in range(2)]
 
 
-draw_curve_4_points((-300,200),(400,350),(300,-300),(-200,-200))
+draw_curve_10_points(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10)
 
 
 turtle.done()
