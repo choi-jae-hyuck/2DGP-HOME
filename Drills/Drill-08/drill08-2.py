@@ -219,6 +219,17 @@ def draw_curve_10_points(p1, p2, p3, p4,p5,p6,p7,p8,p9,p10):
 
 prepare_turtle_canvas()
 
+a1=[random.randint(-300,300) for n in range(2)]
+a2=[random.randint(-300,300) for n in range(2)]
+a3=[random.randint(-300,300) for n in range(2)]
+a4=[random.randint(-300,300) for n in range(2)]
+a5=[random.randint(-300,300) for n in range(2)]
+a6=[random.randint(-300,300) for n in range(2)]
+a7=[random.randint(-300,300) for n in range(2)]
+a8=[random.randint(-300,300) for n in range(2)]
+a9=[random.randint(-300,300) for n in range(2)]
+a10=[random.randint(-300,300) for n in range(2)]
+
 
 draw_curve_4_points((-300,200),(400,350),(300,-300),(-200,-200))
 
