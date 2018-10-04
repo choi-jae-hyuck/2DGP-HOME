@@ -104,8 +104,23 @@ def draw_curve_4_points(p1, p2, p3,p4):
         y = (2 * t ** 2 - 3 * t + 1) * p3[1] + (-4 * t ** 2 + 4 * t) * p4[1] + (2 * t ** 2 - t) * p1[1]
         draw_point((x, y))
     draw_point(p1)
+    pass
+
+def draw_curve_10_points(p1, p2, p3, p4,p5,p6,p7,p8,p9,p10):
+    draw_big_point(p1)
+    draw_big_point(p2)
+    draw_big_point(p3)
+    draw_big_point(p4)
+    draw_big_point(p5)
+    draw_big_point(p6)
+    draw_big_point(p7)
+    draw_big_point(p8)
+    draw_big_point(p9)
+    draw_big_point(p10)
 
     pass
+
+
 
 prepare_turtle_canvas()
 
