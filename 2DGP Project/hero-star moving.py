@@ -17,13 +17,23 @@ hero_frame = 0
 
 while running:
     clear_canvas()
-    star.clip_draw(star_frame * 34 +2,1451 * 1, 31, 31, x, 155)
-    hero.clip_draw(hero_frame * 33,1082 * 1, 33, 57, x, 55)
+
+    #running animation
+    #star.clip_draw(star_frame * 34 +2,1451 * 1, 31, 31, x, 155)
+    #hero.clip_draw(hero_frame * 33 +1,1081 * 1, 32, 57, x, 55)
+    #hero_frame = (hero_frame + 1) % 6
+    #star_frame = (star_frame + 1) % 8
+
+    #idle animation
+    star.clip_draw(star_frame * 34 +2,1485 * 1, 31, 31, x, 155)
+    hero.clip_draw(hero_frame * 41 +1,1140 * 1, 40, 55, x, 55)
+    hero_frame = (hero_frame + 1) % 6
+    star_frame = (star_frame + 1) % 4
+    
     update_canvas()
 
     handle_events()
-    hero_frame = (hero_frame + 1) % 6
-    star_frame = (star_frame + 1) % 8
+    
 
     delay(0.05)
 
