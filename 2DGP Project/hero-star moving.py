@@ -7,21 +7,23 @@ def handle_events():
 
 
 open_canvas()
-grass = load_image('grass.png')
-character = load_image('animation_sheet.png')
+star = load_image('star.png')
+hero = load_image('hero.png')
 
 running = True
 x = 800 // 2
-frame = 0
+star_frame=0
+hero_frame = 0
 
 while running:
     clear_canvas()
-    grass.draw(400, 30)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, 90)
+    star.clip_draw(star_frame * 34 +2,1451 * 1, 31, 31, x, 155)
+    hero.clip_draw(hero_frame * 33,1082 * 1, 33, 57, x, 55)
     update_canvas()
 
     handle_events()
-    frame = (frame + 1) % 8
+    hero_frame = (hero_frame + 1) % 6
+    star_frame = (star_frame + 1) % 8
 
     delay(0.05)
 
