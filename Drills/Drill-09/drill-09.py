@@ -42,7 +42,8 @@ class Ball:
             self.image = load_image('ball41x41.png')
 
     def update(self):
-        self.y -= random.randint(3,30)
+        if(self.y>50):
+            self.y -= random.randint(3,30)
 
     def draw(self):
         self.image.draw(self.x, self.y)
