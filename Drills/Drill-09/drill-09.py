@@ -35,6 +35,7 @@ class Boy:
 class Ball:
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 600
+        self.plus=random.randint(3,30)
         self.size=random.randint(1,2)
         if(self.size==1):
             self.image = load_image('ball21x21.png')
@@ -43,7 +44,7 @@ class Ball:
 
     def update(self):
         if(self.y>50):
-            self.y -= random.randint(3,30)
+            self.y -= self.plus
 
     def draw(self):
         self.image.draw(self.x, self.y)
