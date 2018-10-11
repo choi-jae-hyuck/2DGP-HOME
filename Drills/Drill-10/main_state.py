@@ -98,6 +98,3 @@ def draw():
     update_canvas()
 
 
-#drill 10-1 finish
-#drill 10-2 finish
-
