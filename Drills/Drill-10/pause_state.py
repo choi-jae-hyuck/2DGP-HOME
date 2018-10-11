@@ -5,7 +5,7 @@ import os
 from pico2d import *
 
 import game_framework
-import title_state
+import main_state
 
 
 
@@ -29,7 +29,7 @@ class Pause:
         self.image = load_image('pause.png')
 
     def draw(self):
-        self.image.draw(400,400)
+        self.image.draw(400, 400)
 
 class Boy:
     def __init__(self):
@@ -79,9 +79,9 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type ==SDL_KEYDOWN and event.key ==SDLK_ESCAPE:
-            game_framework.change_state(title_state)
+            game_framework.change_state(main_state)
         elif event.type ==SDL_KEYDOWN and event.key == SDLK_p:
-            game_framework.pause()
+            game_framework.pop_state()
 
 
 def update():
@@ -89,9 +89,7 @@ def update():
 
 
 def draw():
-    clear_canvas()
-    grass.draw()
-    boy.draw()
+    pauseicon.draw()
     update_canvas()
 
 
