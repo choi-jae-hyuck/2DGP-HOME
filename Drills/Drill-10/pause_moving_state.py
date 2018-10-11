@@ -27,9 +27,15 @@ class Grass:
 class Pause:
     def __init__(self):
         self.image = load_image('pause.png')
+        self.blink=0
 
     def draw(self):
-        self.image.draw(400, 400)
+        if(self.blink==0):
+            self.image.draw(400, 400)
+        elif(self.blink==1):
+            pass
+    def update(self):
+        self.blink = (self.blink+1) % 2
 
 class Boy:
     def __init__(self):
@@ -51,16 +57,12 @@ class Boy:
 
 
 def enter():
-    global boy,grass,pauseicon
-    boy =Boy()
-    grass = Grass()
+    global pauseicon
     pauseicon=Pause()
 
 
 def exit():
-    global boy,grass,pauseicon
-    del(boy)
-    del(grass)
+    global pauseicon
     del(pauseicon)
     pass
 
@@ -85,13 +87,16 @@ def handle_events():
 
 
 def update():
-    boy.update()
+    pass
 
 
 def draw():
+    clear_canvas()
     pauseicon.draw()
-    grass.draw()
-    boy.draw()
+    main_state.grass.draw()
+    main_state.boy.draw()
+
+    pauseicon.update()
     update_canvas()
 
 

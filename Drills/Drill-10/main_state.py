@@ -58,7 +58,6 @@ def enter():
     grass = Grass()
     pauseicon=Pause()
 
-
 def exit():
     global boy,grass,pauseicon
     del(boy)
