@@ -24,7 +24,12 @@ class Grass:
     def draw(self):
         self.image.draw(400, 30)
 
+class Pause:
+    def __init__(self):
+        self.image = load_image('pause.png')
 
+    def draw(self):
+        self.image.draw(400,400)
 
 class Boy:
     def __init__(self):
@@ -46,20 +51,22 @@ class Boy:
 
 
 def enter():
-    global boy,grass
+    global boy,grass,pauseicon
     boy =Boy()
     grass = Grass()
+    pauseicon=Pause()
 
 
 def exit():
-    global boy,grass
+    global boy,grass,pauseicon
     del(boy)
     del(grass)
+    del(pauseicon)
     pass
 
 
 def pause():
-    pass
+        pass
 
 
 def resume():
@@ -73,6 +80,8 @@ def handle_events():
             game_framework.quit()
         elif event.type ==SDL_KEYDOWN and event.key ==SDLK_ESCAPE:
             game_framework.change_state(title_state)
+        elif event.type ==SDL_KEYDOWN and event.key == SDLK_p:
+            game_framework.pause()
 
 
 def update():
