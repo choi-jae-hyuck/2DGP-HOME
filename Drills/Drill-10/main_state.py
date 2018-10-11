@@ -98,6 +98,6 @@ def draw():
     update_canvas()
 
 
-#drill 10-1 finish youtube수정
-
+#drill 10-1 finish
+#drill 10-2 finish
 
