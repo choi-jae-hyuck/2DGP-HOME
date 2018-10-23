@@ -1,35 +1,26 @@
 from pico2d import *
 import random
 
-class Floor:
-    image1= None
-    image2 = None
-    image3 = None
-    image4 = None
-    def __init__(self):
-        if Floor.image1==None :
-            Floor.image1=load_image('dungeon_floor.png')
-        elif Floor.image2==None :
-            Floor.image2 = load_image('dungeon_floor2.png')
-        elif Floor.image3 == None:
-            Floor.image3 = load_image('dungeon_floor3.png')
-        elif Floor.image4 == None:
-            Floor.image4 = load_image('dungeon_floor4.png')
+import tiles
+import map
 
-class Stair:
-    image1=None
-    image2=None
-    def __init__(self):
-        if Stair.image1==None:
-            Stair.image1 = load_image('dungeon_stair.png')
-        elif Stair.image2 == None:
-            Stair.image2 = load_image('dungeon_stair2.png')
+gen=map.Generator()
+gen.gen_level()
+open_canvas()
 
-class Wall:
-    image1=None
-    image2=None
-    def __init__(self):
-        if Wall.image1==None:
-            Wall.image1 = load_image('dungeon_wall.png')
-        elif Wall.image2==None:
-            Wall.image2 = load_image('dungeon_wall2.png')
+floor=tiles.Floor()
+wall=tiles.Wall()
+
+running=True
+while running:
+    clear_canvas()
+    for i in range(0,16):
+        for j in range(0,12):
+            if gen.level[j][i]=='floor':
+                floor.image1.clip_draw(0,0,41,41,i*50,j*50,50,50)
+            elif gen.level[j][i]=='wall':
+                wall.image1.clip_draw(0, 0, 41, 41, i * 50, j * 50, 50, 50)
+    update_canvas()
+    delay(0.05)
+
+close_canvas()
