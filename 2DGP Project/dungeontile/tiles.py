@@ -36,9 +36,32 @@ class Wall:
             Wall.image2 = load_image('dungeon_wall2.png')
 
 def MapDraw(list,x,y):
+    wall=Wall()
+    floor=Floor()
     for i in range(y,y+12):
         for j in range(x,x+16):
-            if list[y][x]== 'floor':
-                Floor.image1.clip_draw(0, 0, 41, 41, 25 + (i * 50), 25 + (j * 50), 50, 50)
-            elif list[y][x]=='wall':
-                Wall.image1.clip_draw(0, 0, 41, 41, 25 + i * 50, 25 + j * 50, 50, 50)
+            if list[i][j]== 'floor':
+                Floor.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+            elif list[i][j]=='wall':
+                Wall.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+
+
+def handle_events():
+    global running
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
+gen=map.Generator()
+gen.gen_level()
+open_canvas()
+running=True
+while running:
+    clear_canvas()
+    MapDraw(gen.level,0,0)
+    update_canvas()
+    handle_events()
+    delay(0.05)
+close_canvas()
