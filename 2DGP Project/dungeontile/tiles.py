@@ -35,15 +35,26 @@ class Wall:
         elif Wall.image2==None:
             Wall.image2 = load_image('dungeon_wall2.png')
 
-def MapDraw(list,x,y):
+def MapDraw(list,x,y,map_stage):
     wall=Wall()
     floor=Floor()
+    stair=Stair()
     for i in range(y,y+12):
         for j in range(x,x+16):
-            if list[i][j]== 'floor':
-                Floor.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
-            elif list[i][j]=='wall':
-                Wall.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+            if map_stage == 1:
+                if list[i][j]== 'floor':
+                    Floor.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+                elif list[i][j]=='wall':
+                    Wall.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+                elif list[i][j] == 'stair':
+                    Stair.image1.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+            elif map_stage == 2:
+                if list[i][j]== 'floor':
+                    Floor.image2.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+                elif list[i][j]=='wall':
+                    Wall.image2.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
+                elif list[i][j] == 'stair':
+                    Stair.image2.clip_draw(0, 0, 41, 41, 25 + (j * 50), 25 + (i * 50), 50, 50)
 
 
 def handle_events():
@@ -60,7 +71,7 @@ open_canvas()
 running=True
 while running:
     clear_canvas()
-    MapDraw(gen.level,0,0)
+    MapDraw(gen.level,0,0,1)
     update_canvas()
     handle_events()
     delay(0.05)
