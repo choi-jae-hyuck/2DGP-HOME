@@ -1,5 +1,6 @@
 from pico2d import *
 import random
+import map
 
 class Floor:
     image1= None
@@ -33,3 +34,11 @@ class Wall:
             Wall.image1 = load_image('dungeon_wall.png')
         elif Wall.image2==None:
             Wall.image2 = load_image('dungeon_wall2.png')
+
+def MapDraw(list,x,y):
+    for i in range(y,y+12):
+        for j in range(x,x+16):
+            if list[y][x]== 'floor':
+                Floor.image1.clip_draw(0, 0, 41, 41, 25 + (i * 50), 25 + (j * 50), 50, 50)
+            elif list[y][x]=='wall':
+                Wall.image1.clip_draw(0, 0, 41, 41, 25 + i * 50, 25 + j * 50, 50, 50)
