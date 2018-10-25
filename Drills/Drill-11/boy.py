@@ -31,7 +31,7 @@ class IdleState:
             boy.velocity -= 1
         elif event == LEFT_UP:
             boy.velocity += 1
-        boy.timer = 100
+        boy.timer = 1000
 
     @staticmethod
     def exit(boy, event):
@@ -71,8 +71,6 @@ class RunState:
     def exit(boy, event):
         if event == SPACE:
             boy.fire_ball()
-        if event == Dash:
-            boy.add_event(Dash)
 
     @staticmethod
     def do(boy):
@@ -115,29 +113,21 @@ class DashState:
 
     @staticmethod
     def enter(boy, event):
-        if event == RIGHT_DOWN:
-            boy.velocity += 4
-        elif event == LEFT_DOWN:
-            boy.velocity -= 4
-        elif event == RIGHT_UP:
-            boy.velocity -= 4
-        elif event == LEFT_UP:
-            boy.velocity += 4
-        boy.dir = boy.velocity
+        boy.runtimer=300
 
     @staticmethod
     def exit(boy, event):
         if event == SPACE:
             boy.fire_ball()
-        if boy.timer==0:
-            boy.add_event(Dashout)
 
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
-        boy.timer -= 5
-        boy.x += boy.velocity
+        boy.runtimer -= 1
+        boy.x += boy.velocity * 5
         boy.x = clamp(25, boy.x, 1600 - 25)
+        if boy.runtimer<=0:
+            boy.add_event(Dashout)
 
     @staticmethod
     def draw(boy):
@@ -149,9 +139,9 @@ class DashState:
 
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER: SleepState, SPACE: IdleState,Dash:IdleState,Dashout:IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,Dash:DashState,Dashout:RunState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: RunState, RIGHT_DOWN: RunState, SPACE: RunState,Dash:DashState,Dashout:RunState},
     SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP:RunState,SPACE: IdleState,Dash:SleepState,Dashout:SleepState},
-    DashState:{LEFT_DOWN: IdleState, RIGHT_DOWN:IdleState,LEFT_UP:IdleState,RIGHT_UP: IdleState,SLEEP_TIMER: RunState,SPACE:DashState,Dash:DashState,Dashout:RunState}
+    DashState:{LEFT_DOWN: RunState, RIGHT_DOWN:RunState,LEFT_UP:IdleState,RIGHT_UP: IdleState,SLEEP_TIMER: RunState,SPACE:DashState,Dash:DashState,Dashout:RunState}
 }
 
 class Boy:
