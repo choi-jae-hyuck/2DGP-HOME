@@ -76,7 +76,7 @@ class RunState:
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
         boy.timer -= 1
-        boy.x += boy.velocity
+        boy.x += boy.velocity * 0.3
         boy.x = clamp(25, boy.x, 1600 - 25)
 
     @staticmethod
@@ -124,7 +124,7 @@ class DashState:
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
         boy.runtimer -= 1
-        boy.x += boy.velocity * 5
+        boy.x += boy.velocity * 5 *0.3
         boy.x = clamp(25, boy.x, 1600 - 25)
         if boy.runtimer<=0:
             boy.add_event(Dashout)
