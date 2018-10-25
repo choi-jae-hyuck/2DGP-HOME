@@ -12,7 +12,7 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN, SDLK_SPACE): SPACE,
-    (SDL_KEYDOWN,SDLK_LSHIFT): Dash
+    (SDL_KEYDOWN,SDLK_LSHIFT): Dash,
     (SDL_KEYUP, SDLK_LSHIFT):Dashout
 }
 
@@ -130,7 +130,7 @@ class DashState:
         if event == SPACE:
             boy.fire_ball()
         if boy.timer==0:
-            boy.add_event(SLEEP_TIMER)
+            boy.add_event(Dashout)
 
     @staticmethod
     def do(boy):
@@ -148,10 +148,10 @@ class DashState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER: SleepState, SPACE: IdleState,Dash:IdleState},
-    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,Dash:DashState},
-    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP:RunState,SPACE: IdleState,Dash:SleepState},
-    DashState:{LEFT_DOWN: DashState, RIGHT_DOWN:DashState,LEFT_UP:DashState,RIGHT_UP: DashState,SLEEP_TIMER: RunState,SPACE:DashState,Dash:DashState}
+    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,SLEEP_TIMER: SleepState, SPACE: IdleState,Dash:IdleState,Dashout:IdleState},
+    RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState, LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,Dash:DashState,Dashout:RunState},
+    SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState, LEFT_UP: RunState, RIGHT_UP:RunState,SPACE: IdleState,Dash:SleepState,Dashout:SleepState},
+    DashState:{LEFT_DOWN: IdleState, RIGHT_DOWN:IdleState,LEFT_UP:IdleState,RIGHT_UP: IdleState,SLEEP_TIMER: RunState,SPACE:DashState,Dash:DashState,Dashout:RunState}
 }
 
 class Boy:
