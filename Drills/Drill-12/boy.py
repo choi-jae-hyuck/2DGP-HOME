@@ -1,6 +1,7 @@
 import game_framework
 from pico2d import *
 from ball import Ball
+import random
 
 import game_world
 
@@ -111,6 +112,10 @@ class SleepState:
     def enter(boy, event):
         boy.frame = 0
         boy.ghostframe=0
+        boy.ghostlight= random.randint(0,100) * 0.01
+        boy.ghostuptimer=0
+        boy.ghostcircletimer=0
+        boy.r=PIXEL_PER_METER * 3
 
     @staticmethod
     def exit(boy, event):
@@ -121,14 +126,22 @@ class SleepState:
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         boy.ghostframe = (boy.ghostframe + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
+        if(boy.ghostuptimer<=boy.r):
+            boy.ghostuptimer+=boy.r/100
+
+
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
+            boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
-            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.opacify(boy.ghostlight)
+            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25+boy.ghostuptimer, 100, 100)
         else:
+            boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
-            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.opacify(boy.ghostlight)
+            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25+boy.ghostuptimer, 100, 100)
 
 
 
