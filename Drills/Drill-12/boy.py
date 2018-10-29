@@ -46,7 +46,9 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 1000
+        boy.starttime=get_time()
+        boy.timer = get_time()
+        boy.save = boy.timer + 10.0
 
     @staticmethod
     def exit(boy, event):
@@ -57,9 +59,8 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        print("Frame Time: %f sec, Frame Rate :  fps" % ( FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time))
-        boy.timer -= 1
-        if boy.timer == 0:
+        boy.timer = get_time()
+        if boy.timer >= boy.save:
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -68,6 +69,7 @@ class IdleState:
             boy.image.clip_draw(int(boy.frame) * 100, 300, 100, 100, boy.x, boy.y)
         else:
             boy.image.clip_draw(int(boy.frame) * 100, 200, 100, 100, boy.x, boy.y)
+        boy.font.draw(boy.x - 60, boy.y + 80, '(startTime: %3.2f)' % boy.starttime, (255, 255, 0))
 
 
 class RunState:
@@ -108,6 +110,7 @@ class SleepState:
     @staticmethod
     def enter(boy, event):
         boy.frame = 0
+        boy.ghostframe=0
 
     @staticmethod
     def exit(boy, event):
@@ -116,13 +119,16 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        boy.ghostframe = (boy.ghostframe + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
 
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
 
 
 
@@ -168,7 +174,7 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y +50, '(Time: %3.2f' % get_time(), (255,255,0))
+        self.font.draw(self.x - 60, self.y +50, '(Time: %3.2f)' % get_time(), (255,255,0))
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
