@@ -57,6 +57,7 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
+        print("Frame Time: %f sec, Frame Rate :  fps" % ( FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time))
         boy.timer -= 1
         if boy.timer == 0:
             boy.add_event(SLEEP_TIMER)
@@ -150,7 +151,7 @@ class Boy:
 
 
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.dir*3)
+        ball = Ball(self.x, self.y, self.dir*RUN_SPEED_PPS)
         game_world.add_object(ball, 1)
 
 
