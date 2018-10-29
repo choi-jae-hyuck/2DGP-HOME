@@ -161,7 +161,7 @@ class SleepState:
             elif boy.ghoststart==1:
                 boy.image.clip_composite_draw(int(boy.ghostframe) * 100, 200, 100, 100, -3.141592 / 2, '', (boy.x + 25) +boy.r* math.cos(ANGLE_PER_SEC*(boy.ghostcircletimer%1)), boy.y - 25+boy.ghostuptimer+boy.r* math.sin(ANGLE_PER_SEC*(boy.ghostcircletimer%1)), 100, 100)
             boy.image.opacify(1)
-
+#end
 
 
 
