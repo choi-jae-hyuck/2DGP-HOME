@@ -7,22 +7,13 @@ import game_framework
 import game_world
 
 from boy import Boy
-from grass import Grass
-from ball import Ball
+# fill here
+
 
 name = "MainState"
 
 boy = None
-grass = None
-balls = []
-big_balls = []
-
-
-def collide(a, b):
-    # fill here
-    return True
-
-
+background = None
 
 
 def enter():
@@ -30,13 +21,11 @@ def enter():
     boy = Boy()
     game_world.add_object(boy, 1)
 
-    global grass
-    grass = Grass()
-    game_world.add_object(grass, 0)
+    global background
+    background = Background()
+    game_world.add_object(background, 0)
 
-    # fill here for balls
-
-
+    # fill here
 
 
 
@@ -65,9 +54,6 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
-
-    # fill here for collision check
-
 
 
 def draw():
