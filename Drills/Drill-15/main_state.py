@@ -40,10 +40,13 @@ def enter():
     game_world.add_object(background, 0)
 
     global balls
-    balls = [Ball() for i in range(10)]
+    balls = [Ball() for i in range(100)]
     game_world.add_objects(balls, 1)
 
     background.set_center_object(boy)
+    for i in range(100):
+        balls[i].set_center_object(boy)
+        balls[i].set_background(background)
     boy.set_background(background)
 
 
