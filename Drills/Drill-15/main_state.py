@@ -48,7 +48,7 @@ def enter():
         balls[i].set_center_object(boy)
         balls[i].set_background(background)
     boy.set_background(background)
-
+#
 
 
 def exit():

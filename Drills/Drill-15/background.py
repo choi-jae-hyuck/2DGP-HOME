@@ -11,7 +11,7 @@ class FixedBackground:
         self.canvas_height = get_canvas_height()
         self.w = self.image.w
         self.h = self.image.h
-       
+
 
     def set_center_object(self, boy):
         self.center_object = boy
