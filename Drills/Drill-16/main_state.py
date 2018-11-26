@@ -30,7 +30,8 @@ def enter():
     # game world is prepared already in world_build_state
     global boy
     boy = world_build_state.get_boy()
-    pass
+    global zombie
+    zombie=world_build_state.get_zombie()
 
 def exit():
     game_world.clear()
@@ -59,6 +60,9 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
+        if collide(boy,zombie ):
+            print(1)
+            pass
 
 
 def draw():

@@ -81,6 +81,7 @@ class WalkingState:
             boy.image.clip_draw(int(boy.frame) * 100, 0, 100, 100, boy.x, boy.y)
             boy.dir = -1
         else:
+
             # if boy x_velocity == 0
             if boy.y_velocity > 0 or boy.y_velocity < 0:
                 if boy.dir == 1:
@@ -136,7 +137,6 @@ class Boy:
     def __setstate__(self, state):
         self.__init__()
         self.__dict__.update(state)
-        pass
 
     def get_bb(self):
         # fill here
